@@ -23,12 +23,6 @@ set_tmux_option() {
   tmux set-option -gq "$option" "$value"
 }
 
-# Escape globbing charaters
-# Usage: escape_glob_chars <string>
-escape_glob_chars() {
-  echo "$1" | sed 's/[.[\*^$()+?{|]/\\&/g'
-}
-
 # Check if verbose option is enabled
 verbose_enabled() {
   local verbose_value="$(get_tmux_option "$verbose_option" "$verbose_default")"

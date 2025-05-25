@@ -50,10 +50,6 @@ if [[ ! -f "$PID_FILE_PATH" ]]; then  # If pane not yet monitored
   # NOTE: Looks complicated but uses shell parameter expansion
   # see https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Shell-Parameter-Expansion
   prompt_suffixes="$(get_tmux_option "$prompt_suffixes" "$prompt_suffixes_default")"
-  prompt_suffixes=${prompt_suffixes// /} # Remove whitespace
-  prompt_suffixes=${prompt_suffixes//,/|} # Replace comma with or operator
-  prompt_suffixes=$(escape_glob_chars "$prompt_suffixes")
-  prompt_suffixes="\(${prompt_suffixes}\)$"
   
   # Check process status every 10 seconds to see if has is finished
   while true; do
@@ -62,7 +58,7 @@ if [[ ! -f "$PID_FILE_PATH" ]]; then  # If pane not yet monitored
     
     # run tests to determine if work is done
     # if so, break and notify
-    if echo "$output" | tail -n2 | grep -e $prompt_suffixes &> /dev/null; then
+    if echo "$output" | tail -n2 | grep -E $prompt_suffixes &> /dev/null; then
       # tmux display-message "$@"
       if [[ "$1" == "true" ]]; then
         tmux switch -t \$"$SESSION_ID"
