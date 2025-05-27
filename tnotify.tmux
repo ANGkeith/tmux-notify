@@ -28,6 +28,7 @@ tmux unbind-key C-M-m
 
 tmux bind-key m run-shell -b "$CURRENT_DIR/scripts/notify.sh"
 tmux bind-key M run-shell -b "$CURRENT_DIR/scripts/cancel.sh"
+tmux bind-key K run-shell -b "$CURRENT_DIR/scripts/cancel-all.sh"
 tmux bind-key M-m run-shell -b "$CURRENT_DIR/scripts/notify.sh true"
 tmux bind-key C-m run-shell -b "$CURRENT_DIR/scripts/notify.sh false true"
 tmux bind-key C-M-m run-shell -b "$CURRENT_DIR/scripts/notify.sh true true"
